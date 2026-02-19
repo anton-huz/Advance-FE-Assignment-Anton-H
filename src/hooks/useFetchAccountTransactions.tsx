@@ -13,7 +13,7 @@ interface UseFetchAccountTransactionsParams {
 const useFetchAccountTransactions = (
   params: UseFetchAccountTransactionsParams,
 ) => {
-  return useQuery<PaginatedResponse<Transaction[]>>(
+  return useQuery<Transaction[] | null>(
     [
       QueryClientIds.ACCOUNT_TRANSACTIONS,
       params.account_id,
