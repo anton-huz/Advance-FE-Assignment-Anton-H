@@ -62,10 +62,12 @@ class ConsoleMonitoringService implements IMonitoringService {
   }
 
   captureEvent(event: MonitoringEvent): void {
+    // eslint-disable-next-line no-console
     console.log('[Monitoring] Event:', event.event_id, event.message);
   }
 
   captureException(error: Error, context?: Record<string, any>): void {
+    // eslint-disable-next-line no-console
     console.error('[Monitoring] Exception:', error.message, context);
   }
 
@@ -73,6 +75,7 @@ class ConsoleMonitoringService implements IMonitoringService {
     message: string,
     level: MonitoringEvent['level'] = 'info',
   ): void {
+    // eslint-disable-next-line no-console
     console.log(`[Monitoring] ${level}:`, message);
   }
 

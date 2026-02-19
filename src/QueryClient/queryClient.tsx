@@ -6,6 +6,7 @@ const queryClient = new QueryClient({
       retry: 2,
       staleTime: 1000 * 60 * 3,
       onError: error => {
+        // eslint-disable-next-line no-console
         console.error(
           '[QueryClient] Query error:',
           error instanceof Error ? error.message : error,
@@ -14,6 +15,7 @@ const queryClient = new QueryClient({
     },
     mutations: {
       onError: error => {
+        // eslint-disable-next-line no-console
         console.error(
           '[QueryClient] Mutation error:',
           error instanceof Error ? error.message : error,

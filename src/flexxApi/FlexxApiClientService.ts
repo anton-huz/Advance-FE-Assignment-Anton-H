@@ -54,6 +54,7 @@ async function request<T>({
 
   const requestBody = body ? JSON.stringify(body) : undefined;
 
+  // eslint-disable-next-line no-console
   console.log(`[API] ${method} ${endpoint}`);
 
   const response = await fetch(url, {

@@ -15,7 +15,7 @@ interface AdvanceFilterChipProps extends FilterChip {
 }
 
 const AdvanceButtonChip: React.FC<AdvanceFilterChipProps> = ({
-  id,
+  // id,
   label,
   active,
   onClick,

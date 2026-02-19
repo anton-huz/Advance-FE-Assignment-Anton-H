@@ -76,7 +76,7 @@ const FlexxTextField = forwardRef<HTMLInputElement, FlexxTextFieldProps>(
       exactLength,
       customLengthError,
       showCharacterCount,
-      isLoading,
+      // isLoading,
       style,
       min,
       max,
@@ -217,7 +217,7 @@ const FlexxTextField = forwardRef<HTMLInputElement, FlexxTextFieldProps>(
 
     const formattedLabel = required ? `${label} *` : label;
     const isAutocomplete = select && options;
-    const skeletonWidth = width || maxWidth || (fullWidth ? '100%' : 300);
+    // const skeletonWidth = width || maxWidth || (fullWidth ? '100%' : 300);
 
     const readOnlyStyles = {
       '& .MuiOutlinedInput-root': {

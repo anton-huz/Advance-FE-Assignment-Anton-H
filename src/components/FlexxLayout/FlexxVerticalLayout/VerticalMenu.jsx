@@ -12,7 +12,7 @@ import useVerticalNav from '@menu/hooks/useVerticalNav';
 // Style Imports
 import menuItemStyles from '@core/styles/vertical/menuItemStyles';
 import menuSectionStyles from '@core/styles/vertical/menuSectionStyles';
-import {useUserSession} from '@components/UserSessionProvider/UserSessionProvider';
+// import {useUserSession} from '@components/UserSessionProvider/UserSessionProvider';
 // Styled Component Imports
 import StyledVerticalNavExpandIcon from '@menu/styles/vertical/StyledVerticalNavExpandIcon';
 import FlexxMenuItemComponent from '@components/FlexxLayout/FlexxVerticalLayout/FlexxSideBarMenu/FlexxMenuItem';
@@ -35,7 +35,7 @@ const VerticalMenu = () => {
   const theme = useTheme();
   const verticalNavOptions = useVerticalNav();
   const {settings} = useSettings();
-  const session = useUserSession();
+  // const session = useUserSession();
 
   // Vars
   const {transitionDuration} = verticalNavOptions;
