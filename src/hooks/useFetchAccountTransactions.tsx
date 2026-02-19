@@ -1,7 +1,7 @@
 import {useQuery} from 'react-query';
 
 import {Transaction} from '@/domain/Transaction';
-import {PaginatedResponse} from '@/domain/Pagination';
+// import {PaginatedResponse} from '@/domain/Pagination';
 import flexxApiService from '@/flexxApi/flexxApiService';
 import {QueryClientIds} from '@/QueryClient/queryClient.ids';
 
