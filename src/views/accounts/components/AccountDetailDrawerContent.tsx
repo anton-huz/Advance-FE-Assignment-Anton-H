@@ -2,14 +2,14 @@ import React, {useCallback, useRef} from 'react';
 
 import Divider from '@mui/material/Divider';
 import {AccountStatus} from '@/domain/Account';
+import {useDrawerHolder} from '@/hooks/useDrawerHolder';
 import {FlexxTable} from '@components/FlexxTable/FlexxTable';
 import useFetchAccountById from '@/hooks/useFetchAccountById';
+import MoveMoneyForm from '@views/accounts/components/MoveMoneyForm';
 import {Chip, CircularProgress, Stack, Typography} from '@mui/material';
+import AdvanceActionButtons from '@components/AdvanceActionButtons/AdvanceActionButtons';
 import useTransactionsDashboardTable from '@views/accounts/hooks/useTransactionsDashboardTable';
 import AdvanceAccountNumberDisplay from '@components/AdvanceAccountNumberDisplay/AdvanceAccountNumberDisplay';
-import AdvanceActionButtons from "@components/AdvanceActionButtons/AdvanceActionButtons";
-import {useDrawerHolder} from "@/hooks/useDrawerHolder";
-import MoveMoneyForm from "@views/accounts/components/MoveMoneyForm";
 
 interface AccountDetailDrawerContentProps {
   accountId: string | null;
@@ -41,7 +41,12 @@ const AccountDetailDrawerContent: React.FC<AccountDetailDrawerContentProps> = ({
     openDrawer: openMoveMoneyDrawer,
     DrawerHolder: MoveMoneyDrawer,
   } = useDrawerHolder({
-    content: <MoveMoneyForm onSuccess={onMoveMoneySuccess} sourceAccountId={account?.account_id} />,
+    content: (
+      <MoveMoneyForm
+        onSuccess={onMoveMoneySuccess}
+        sourceAccountId={account?.account_id}
+      />
+    ),
   });
   moveMoneyHandler.current = closeMoveMoneyDrawer;
 
@@ -63,12 +68,14 @@ const AccountDetailDrawerContent: React.FC<AccountDetailDrawerContentProps> = ({
     );
   }
 
-  const advanceButtons = [{
-    name: 'Move Money',
-    variant: 'outlined',
-    onClick: openMoveMoneyDrawer,
-    startIcon: 'fluent--arrow-swap-20-regular',
-  } as const];
+  const advanceButtons = [
+    {
+      name: 'Move Money',
+      variant: 'outlined',
+      onClick: openMoveMoneyDrawer,
+      startIcon: 'fluent--arrow-swap-20-regular',
+    } as const,
+  ];
 
   return (
     <Stack gap={2} p={2}>
@@ -112,7 +119,13 @@ const AccountDetailDrawerContent: React.FC<AccountDetailDrawerContentProps> = ({
           </Typography>
         </Stack>
 
-        <Stack direction='row' gap={'1rem'} alignItems={'center'} justifyContent={'flex-end'} flex={'1 1 auto'}>
+        <Stack
+          direction='row'
+          gap={'1rem'}
+          alignItems={'center'}
+          justifyContent={'flex-end'}
+          flex={'1 1 auto'}
+        >
           <AdvanceActionButtons actions={advanceButtons} />
         </Stack>
         {MoveMoneyDrawer}

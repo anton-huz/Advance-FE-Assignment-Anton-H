@@ -5,9 +5,8 @@ import flexxApiService from '@/flexxApi/flexxApiService';
 import {QueryClientIds} from '@/QueryClient/queryClient.ids';
 
 const useFetchAllTransactions = () => {
-  return useQuery<Transaction[]>(
-    [QueryClientIds.ALL_TRANSACTIONS],
-    () => flexxApiService().fetchAllTransactions(),
+  return useQuery<Transaction[]>([QueryClientIds.ALL_TRANSACTIONS], () =>
+    flexxApiService().fetchAllTransactions(),
   );
 };
 

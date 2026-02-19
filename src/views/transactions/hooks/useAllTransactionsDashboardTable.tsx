@@ -1,7 +1,10 @@
 import {useMemo} from 'react';
 
-import {FlexxColumn, FlexxTableRow} from '@components/FlexxTable/domain/FlexxTable';
 import useFetchAllTransactions from '@/hooks/useFetchAllTransactions';
+import {
+  FlexxColumn,
+  FlexxTableRow,
+} from '@components/FlexxTable/domain/FlexxTable';
 
 const columns: FlexxColumn[] = [
   {field: 'date', headerName: 'Date', dateFormat: 'sm'},

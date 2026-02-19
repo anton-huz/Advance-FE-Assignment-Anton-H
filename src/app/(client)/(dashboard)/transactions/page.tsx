@@ -3,12 +3,13 @@
 import React from 'react';
 
 import {Typography} from '@mui/material';
-import FlexxDashboardWrapper from '@/components/FlexxDashboardWrapper';
 import {FlexxTable} from '@components/FlexxTable/FlexxTable';
+import FlexxDashboardWrapper from '@/components/FlexxDashboardWrapper';
 import useAllTransactionsDashboardTable from '@views/transactions/hooks/useAllTransactionsDashboardTable';
 
 const TransactionsPage = () => {
-  const {columns, rows, isLoading, isError} = useAllTransactionsDashboardTable();
+  const {columns, rows, isLoading, isError} =
+    useAllTransactionsDashboardTable();
 
   return (
     <FlexxDashboardWrapper>
