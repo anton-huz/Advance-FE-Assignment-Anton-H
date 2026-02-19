@@ -1,12 +1,15 @@
 import React from 'react';
 
 import {Stack} from '@mui/material';
+import {useDrawerHolder} from "@/hooks/useDrawerHolder";
 import AdvanceActionButtons from '@components/AdvanceActionButtons/AdvanceActionButtons';
 import {ActionButtonConfig} from '@components/AdvanceActionButtons/types';
-import {useCreateAccount} from '@views/accounts/hooks/useCreateAccount';
+import CreateAccountForm from "@views/accounts/components/CreateAccountForm";
 
 const AccountsCtas: React.FC = () => {
-  const {openDrawer, CreateAccountDrawer} = useCreateAccount();
+  const {openDrawer, DrawerHolder} = useDrawerHolder({
+    content: <CreateAccountForm />,
+  });
 
   const actions: ActionButtonConfig[] = [
     {
@@ -22,7 +25,7 @@ const AccountsCtas: React.FC = () => {
       <Stack direction='row' gap={'1rem'} alignItems={'center'}>
         <AdvanceActionButtons actions={actions} />
       </Stack>
-      {CreateAccountDrawer}
+      {DrawerHolder}
     </>
   );
 };

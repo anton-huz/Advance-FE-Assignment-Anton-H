@@ -6,14 +6,22 @@ import {FlexxTable} from '@components/FlexxTable/FlexxTable';
 import useFetchAccounts from '@/hooks/useFetchAccounts';
 import useAccountsDashboardTable from '@views/accounts/hooks/useAccountsDashboardTable';
 import {useGlobalSearch} from '@core/hooks/useGlobalSearch';
+import {Account} from "@/domain/Account";
+import {Typography} from "@mui/material";
 
-const AccountsDashboardTable: React.FC = () => {
+const AccountDetail: React.FC<{ account?: Account}> = ({
+  account,
+}) => {
   const {searchQuery} = useGlobalSearch();
   const {data, isLoading, isError} = useFetchAccounts({searchQuery});
   const {columns, rows, CreateAccountDrawer} = useAccountsDashboardTable(data);
 
   return (
     <>
+      <Typography variant='h5' sx={{mb: 2}}>
+        Backend API Schema
+      </Typography>
+
       <FlexxTable
         columns={columns}
         rows={rows}
@@ -26,4 +34,4 @@ const AccountsDashboardTable: React.FC = () => {
   );
 };
 
-export default AccountsDashboardTable;
+export default AccountDetail;

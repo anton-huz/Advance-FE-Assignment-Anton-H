@@ -6,6 +6,7 @@ import {
   FlexxTableRow,
 } from '@components/FlexxTable/domain/FlexxTable';
 import AdvanceAccountNumberDisplay from '@components/AdvanceAccountNumberDisplay/AdvanceAccountNumberDisplay';
+import {useCreateAccount} from '@views/accounts/hooks/useCreateAccount';
 
 const columns: FlexxColumn[] = [
   {field: 'name', headerName: 'Name'},
@@ -16,6 +17,8 @@ const columns: FlexxColumn[] = [
 ];
 
 const useAccountsDashboardTable = (accounts: Account[] | undefined) => {
+  const {openDrawer, CreateAccountDrawer} = useCreateAccount();
+
   const rows: FlexxTableRow[] = useMemo(() => {
     if (!accounts) return [];
 
@@ -34,10 +37,13 @@ const useAccountsDashboardTable = (accounts: Account[] | undefined) => {
         status: account.status,
         balance: account.balance,
       },
+      onClick: () => {
+        openDrawer();
+      },
     }));
   }, [accounts]);
 
-  return {columns, rows};
+  return {columns, rows, CreateAccountDrawer};
 };
 
 export default useAccountsDashboardTable;

@@ -27,6 +27,10 @@ class FlexxApiService {
     const queryParams = this.formatQueryParams(params);
     return get<Account[]>({endpoint: `pages/accounts?${queryParams}`});
   }
+
+  async fetchAccountById(accountId: string): Promise<Account> {
+    return get<Account>({endpoint: `account/${accountId}`});
+  }
 }
 
 let instance: FlexxApiService | null = null;
