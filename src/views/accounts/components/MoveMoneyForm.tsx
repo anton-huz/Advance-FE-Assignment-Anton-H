@@ -32,7 +32,7 @@ const MoveMoneySchema = v.object({
     ),
   ]),
   confirmed: v.boolean([
-    v.custom((val: boolean) => val === true, 'You must confirm the transfer.'),
+    v.custom((val: boolean) => val, 'You must confirm the transfer.'),
   ]),
 });
 
