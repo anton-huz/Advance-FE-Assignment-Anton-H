@@ -32,7 +32,12 @@ const FlexxTablePagination: FC<FlexxTablePaginationProps> = ({
   handleRowsPerPageChange,
   dataTestId,
   totalItems,
+  disablePagination,
 }) => {
+  if (disablePagination) {
+    return null;
+  }
+
   if (isLoading) {
     return <FlexxTablePaginationSkeleton />;
   }
