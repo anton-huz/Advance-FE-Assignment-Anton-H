@@ -1,5 +1,7 @@
+import {PaginatedResponse} from '@/domain/Pagination';
+import {Account, CreateAccountPayload} from '@/domain/Account';
+import {MoveMoneyPayload, Transaction} from '@/domain/Transaction';
 import {get, post, put, remove} from '@/flexxApi/FlexxApiClientService';
-import {Account} from '@/domain/Account';
 
 class FlexxApiService {
   private formatQueryParams(
@@ -29,7 +31,36 @@ class FlexxApiService {
   }
 
   async fetchAccountById(accountId: string): Promise<Account> {
-    return get<Account>({endpoint: `account/${accountId}`});
+    return get<Account>({endpoint: `pages/accounts/${accountId}`});
+  }
+
+  async fetchTransactions(params: {
+    account_id: string;
+    search_term?: string;
+  }): Promise<PaginatedResponse<Transaction[]>> {
+    const queryParams = this.formatQueryParams(params);
+    return get<PaginatedResponse<Transaction[]>>({
+      endpoint: `pages/transactions?${queryParams}`,
+    });
+  }
+
+  async createAccount(payload: CreateAccountPayload): Promise<Account> {
+    return post<Account>({endpoint: 'pages/accounts', body: payload});
+  }
+
+  async moveMoney(payload: MoveMoneyPayload): Promise<Transaction> {
+    return post<Transaction>({endpoint: 'pages/move-money', body: payload});
+  }
+
+  async fetchAccountTransactions(
+    accountId: string,
+    params?: {search_term?: string},
+  ): Promise<Transaction[] | null> {
+    const queryParams = this.formatQueryParams(params);
+    const endpoint = queryParams
+      ? `pages/accounts/${accountId}/transactions?${queryParams}`
+      : `pages/accounts/${accountId}/transactions`;
+    return get<Transaction[] | null>({endpoint});
   }
 }
 
