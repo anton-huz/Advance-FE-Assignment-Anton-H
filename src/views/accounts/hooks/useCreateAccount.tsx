@@ -28,7 +28,7 @@ export const useCreateAccount = () => {
         ]}
         drawerWidth='md'
       >
-        <CreateAccountForm />
+        <CreateAccountForm onSuccess={closeDrawer} />
       </DrawerWrapper>,
       document.body,
     );
