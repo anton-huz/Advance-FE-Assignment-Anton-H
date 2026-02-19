@@ -31,7 +31,7 @@ export const useDrawerHolder = ({content}: {content: React.ReactElement}) => {
       </DrawerWrapper>,
       document.body,
     );
-  }, [isOpen, closeDrawer]);
+  }, [isOpen, closeDrawer, content]);
 
   return {
     isOpen,

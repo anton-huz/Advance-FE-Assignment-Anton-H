@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 
+import FlexxDashboardWrapper from '@/components/FlexxDashboardWrapper';
 import {
   Box,
   Card,
@@ -13,7 +14,6 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import FlexxDashboardWrapper from '@/components/FlexxDashboardWrapper';
 
 const tasks = [
   {

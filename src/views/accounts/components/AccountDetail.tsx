@@ -2,19 +2,17 @@
 
 import React from 'react';
 
-import {FlexxTable} from '@components/FlexxTable/FlexxTable';
+import {Account} from '@/domain/Account';
+import {Typography} from '@mui/material';
 import useFetchAccounts from '@/hooks/useFetchAccounts';
-import useAccountsDashboardTable from '@views/accounts/hooks/useAccountsDashboardTable';
 import {useGlobalSearch} from '@core/hooks/useGlobalSearch';
-import {Account} from "@/domain/Account";
-import {Typography} from "@mui/material";
+import {FlexxTable} from '@components/FlexxTable/FlexxTable';
+import useAccountsDashboardTable from '@views/accounts/hooks/useAccountsDashboardTable';
 
-const AccountDetail: React.FC<{ account?: Account}> = ({
-  account,
-}) => {
+const AccountDetail: React.FC<{account?: Account}> = ({account}) => {
   const {searchQuery} = useGlobalSearch();
   const {data, isLoading, isError} = useFetchAccounts({searchQuery});
-  const {columns, rows, CreateAccountDrawer} = useAccountsDashboardTable(data);
+  const {columns, rows, DrawerHolder} = useAccountsDashboardTable(data);
 
   return (
     <>
@@ -29,7 +27,7 @@ const AccountDetail: React.FC<{ account?: Account}> = ({
         isError={isError}
         emptyState='No accounts found'
       />
-      {CreateAccountDrawer}
+      {DrawerHolder}
     </>
   );
 };

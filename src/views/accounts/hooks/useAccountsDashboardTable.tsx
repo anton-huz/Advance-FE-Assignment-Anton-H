@@ -1,12 +1,13 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useState} from 'react';
 
 import {Account} from '@/domain/Account';
+import {useDrawerHolder} from '@/hooks/useDrawerHolder';
 import {
   FlexxColumn,
   FlexxTableRow,
 } from '@components/FlexxTable/domain/FlexxTable';
+import AccountDetailDrawerContent from '@views/accounts/components/AccountDetailDrawerContent';
 import AdvanceAccountNumberDisplay from '@components/AdvanceAccountNumberDisplay/AdvanceAccountNumberDisplay';
-import {useCreateAccount} from '@views/accounts/hooks/useCreateAccount';
 
 const columns: FlexxColumn[] = [
   {field: 'name', headerName: 'Name'},
@@ -17,7 +18,13 @@ const columns: FlexxColumn[] = [
 ];
 
 const useAccountsDashboardTable = (accounts: Account[] | undefined) => {
-  const {openDrawer, CreateAccountDrawer} = useCreateAccount();
+  const [selectedAccountId, setSelectedAccountId] = useState<string | null>(
+    null,
+  );
+
+  const {openDrawer, DrawerHolder} = useDrawerHolder({
+    content: <AccountDetailDrawerContent accountId={selectedAccountId} />,
+  });
 
   const rows: FlexxTableRow[] = useMemo(() => {
     if (!accounts) return [];
@@ -38,12 +45,13 @@ const useAccountsDashboardTable = (accounts: Account[] | undefined) => {
         balance: account.balance,
       },
       onClick: () => {
+        setSelectedAccountId(account.account_id);
         openDrawer();
       },
     }));
-  }, [accounts]);
+  }, [accounts, openDrawer]);
 
-  return {columns, rows, CreateAccountDrawer};
+  return {columns, rows, DrawerHolder};
 };
 
 export default useAccountsDashboardTable;
