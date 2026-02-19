@@ -47,3 +47,5 @@ src/assets/iconify-icons/generated-icons.css
 
 # Source maps (security - prevent source maps in production)
 *.map
+/.yarnrc.yml
+/.yarn/install-state.gz
