@@ -48,6 +48,10 @@ class FlexxApiService {
     return post<Account>({endpoint: 'pages/accounts', body: payload});
   }
 
+  async fetchAllTransactions(): Promise<Transaction[]> {
+    return get<Transaction[]>({endpoint: 'pages/transactions'});
+  }
+
   async moveMoney(payload: MoveMoneyPayload): Promise<Transaction> {
     return post<Transaction>({endpoint: 'pages/move-money', body: payload});
   }
