@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useRef} from 'react';
 
 import Divider from '@mui/material/Divider';
 import {AccountStatus} from '@/domain/Account';
@@ -7,6 +7,9 @@ import useFetchAccountById from '@/hooks/useFetchAccountById';
 import {Chip, CircularProgress, Stack, Typography} from '@mui/material';
 import useTransactionsDashboardTable from '@views/accounts/hooks/useTransactionsDashboardTable';
 import AdvanceAccountNumberDisplay from '@components/AdvanceAccountNumberDisplay/AdvanceAccountNumberDisplay';
+import AdvanceActionButtons from "@components/AdvanceActionButtons/AdvanceActionButtons";
+import {useDrawerHolder} from "@/hooks/useDrawerHolder";
+import MoveMoneyForm from "@views/accounts/components/MoveMoneyForm";
 
 interface AccountDetailDrawerContentProps {
   accountId: string | null;
@@ -29,6 +32,19 @@ const AccountDetailDrawerContent: React.FC<AccountDetailDrawerContentProps> = ({
     isError: transactionsError,
   } = useTransactionsDashboardTable(accountId);
 
+  const moveMoneyHandler = useRef<() => void>(null);
+  const onMoveMoneySuccess = useCallback(() => {
+    moveMoneyHandler.current?.();
+  }, []);
+  const {
+    closeDrawer: closeMoveMoneyDrawer,
+    openDrawer: openMoveMoneyDrawer,
+    DrawerHolder: MoveMoneyDrawer,
+  } = useDrawerHolder({
+    content: <MoveMoneyForm onSuccess={onMoveMoneySuccess} sourceAccountId={account?.account_id} />,
+  });
+  moveMoneyHandler.current = closeMoveMoneyDrawer;
+
   if (isLoading) {
     return (
       <Stack flexGrow={1} alignItems='center' justifyContent='center'>
@@ -46,6 +62,13 @@ const AccountDetailDrawerContent: React.FC<AccountDetailDrawerContentProps> = ({
       </Stack>
     );
   }
+
+  const advanceButtons = [{
+    name: 'Move Money',
+    variant: 'outlined',
+    onClick: openMoveMoneyDrawer,
+    startIcon: 'fluent--arrow-swap-20-regular',
+  } as const];
 
   return (
     <Stack gap={2} p={2}>
@@ -88,6 +111,11 @@ const AccountDetailDrawerContent: React.FC<AccountDetailDrawerContentProps> = ({
             Routing Number
           </Typography>
         </Stack>
+
+        <Stack direction='row' gap={'1rem'} alignItems={'center'} justifyContent={'flex-end'} flex={'1 1 auto'}>
+          <AdvanceActionButtons actions={advanceButtons} />
+        </Stack>
+        {MoveMoneyDrawer}
       </Stack>
       <Stack gap={1}>
         <Typography variant='subtitle2'>
